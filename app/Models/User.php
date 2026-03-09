@@ -30,5 +30,25 @@ class User extends Model
         'password',
         'password_salt',
     ];
+
+    public function portfolio()
+    {
+        return $this->hasOne(Portfolio::class);
+    }
+
+    public function holdings()
+    {
+        return $this->hasMany(Holding::class);
+    }
+
+    public function trades()
+    {
+        return $this->hasMany(Trade::class);
+    }
+
+    public function simulationSessions()
+    {
+        return $this->hasMany(SimulationSession::class);
+    }
 }
 

@@ -1,35 +1,43 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="card">
-        <h1>Login</h1>
+    <h1>Welcome back</h1>
+    <p class="card-subtitle">Log in to continue your trading practice session.</p>
 
-        @if(!empty($error ?? null))
-            <div class="error-list">
-                <ul>
-                    <li>{{ $error }}</li>
-                </ul>
-            </div>
-        @endif
+    @if(!empty($error ?? null))
+        <div class="error-list">
+            <ul>
+                <li>{{ $error }}</li>
+            </ul>
+        </div>
+    @endif
 
-        <form method="POST" action="{{ route('login.perform') }}">
-            @csrf
-            <div style="margin-bottom: 1rem;">
-                <label for="email">Email</label><br>
-                <input id="email" name="email" type="email" value="{{ $old['email'] ?? '' }}" required
-                       style="width:100%;padding:0.5rem;border-radius:0.5rem;border:1px solid #4b5563;background:#020617;color:#e5e7eb;">
-            </div>
-            <div style="margin-bottom: 1rem;">
-                <label for="password">Password</label><br>
-                <input id="password" name="password" type="password" required
-                       style="width:100%;padding:0.5rem;border-radius:0.5rem;border:1px solid #4b5563;background:#020617;color:#e5e7eb;">
-            </div>
+    <form method="POST" action="{{ route('login.perform') }}">
+        @csrf
 
-            <button type="submit"
-                    style="padding:0.6rem 1.2rem;border-radius:9999px;border:none;background:#f97316;color:#111827;font-weight:600;cursor:pointer;">
-                Login
+        <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" value="{{ $old['email'] ?? '' }}" required>
+        </div>
+
+        <div class="field">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" required>
+        </div>
+
+        <div style="margin-top:1.1rem;">
+            <button type="submit" class="btn">
+                Log in
             </button>
-        </form>
-    </div>
+            <a href="{{ route('register.show') }}" class="btn-secondary-link">
+                New here? Create an account
+            </a>
+        </div>
+    </form>
+
+    <p class="muted-text" style="margin-top:1.4rem;">
+        This simulator uses virtual money only, so you can safely experiment and learn how prices react
+        to your trades before touching real markets.
+    </p>
 @endsection
 

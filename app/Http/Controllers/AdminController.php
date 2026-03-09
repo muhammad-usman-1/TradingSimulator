@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Asset;
+use App\Models\Trade;
 use Illuminate\View\View;
 
 /**
@@ -14,11 +16,18 @@ class AdminController extends Controller
 {
     public function index(): View
     {
-        // Simple list retrieval; more complex sorting/algorithms will be added later.
         $users = User::orderBy('created_at')->get();
+        $totalUsers = $users->count();
+        $totalTrades = Trade::count();
+        $totalAssets = Asset::count();
+        $totalBalance = User::sum('current_balance');
 
         return view('admin.users', [
             'users' => $users,
+            'totalUsers' => $totalUsers,
+            'totalTrades' => $totalTrades,
+            'totalAssets' => $totalAssets,
+            'totalBalance' => $totalBalance,
         ]);
     }
 }

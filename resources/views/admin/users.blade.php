@@ -3,9 +3,28 @@
 @section('content')
     <div class="card">
         <h1>Users (Admin)</h1>
-        <p>Below is a simple list of all registered users, their roles, and starting balances.</p>
+        <p class="card-subtitle">Below is a simple list of all registered users, their roles, and balances.</p>
 
-        <table style="width:100%;border-collapse:collapse;margin-top:1rem;">
+        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0.75rem;margin-bottom:1rem;font-size:0.85rem;color:#9ca3af;">
+            <div>
+                <strong>Total users:</strong><br>
+                {{ $totalUsers ?? count($users) }}
+            </div>
+            <div>
+                <strong>Total trades:</strong><br>
+                {{ $totalTrades ?? 0 }}
+            </div>
+            <div>
+                <strong>Active assets:</strong><br>
+                {{ $totalAssets ?? 0 }}
+            </div>
+            <div>
+                <strong>Combined balances:</strong><br>
+                £{{ isset($totalBalance) ? number_format($totalBalance, 2) : '0.00' }}
+            </div>
+        </div>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:0.5rem;">
             <thead>
             <tr style="text-align:left;border-bottom:1px solid #374151;">
                 <th style="padding:0.5rem;">ID</th>
